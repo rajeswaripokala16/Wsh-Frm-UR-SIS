@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brothers, My Forever Strength</title>
+    <!-- Google Fonts: Poppins for headings and body text -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            color: #333;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Floating hearts/sparkles animation */
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.3);
+            animation: float 10s linear infinite;
+        }
+        .heart:nth-child(odd) { animation-delay: -2s; }
+        .heart:nth-child(even) { animation-delay: -5s; }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+        /* Glassmorphism card */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        /* Headings */
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #fff;
+            opacity: 0.9;
+        }
+        /* Slideshow container */
+        .slideshow {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        .caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+        /* Navigation arrows */
+        .arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        .arrow {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #333;
+            pointer-events: all;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .arrow:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+        /* Dots */
+        .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .dot.active {
+            background: #fff;
+        }
+        /* Audio button */
+        .audio-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .audio-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.05);
+        }
+        /* From Your Sister section */
+        .sister-section {
+            text-align: left;
+            margin-top: 30px;
+        }
+        .sister-section h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: center;
+        }
+        .sister-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #fff;
+            opacity: 0.9;
+        }
+        .sister-section .highlight {
+            font-weight: 600;
+            color: #ffd700;
+        }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.2rem; }
+            .slideshow { height: 300px; }
+            .caption { font-size: 1rem; padding: 10px; }
+            .arrow { width: 40px; height: 40px; font-size: 1.2rem; }
+            .card { padding: 20px; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem; }
+            .slideshow { height: 250px; }
+            .sister-section p { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts/sparkles -->
+    <div class="floating-hearts">
+        <div class="heart">❤️</div>
+        <div class="heart">✨</div>
+        <div class="heart">❤️</div>
+        <div class="heart">✨</div>
+        <div class="heart">❤️</div>
+        <div class="heart">✨</div>
+        <div class="heart">❤️</div>
+        <div class="heart">✨</div>
+        <div class="heart">❤️</div>
+        <div class="heart">✨</div>
+    </div>
+
+    <!-- Main card -->
+    <div class="card">
+        <h1>To My Dearest Brother(Developer)</h1>
+        <h2>A small tribute from your sister, filled with love and memories</h2>
+
+        <!-- Slideshow -->
+        <div class="slideshow">
+            <!-- Slides will be dynamically added by JS -->
+            <div class="arrows">
+                <button class="arrow prev">&larr;</button>
+                <button class="arrow next">&rarr;</button>
+            </div>
+        </div>
+        <div class="dots">
+            <!-- Dots will be dynamically added by JS -->
+        </div>
+
+        <!-- Audio button -->
+        <!-- <button class="audio-btn" id="audioBtn">Play Music</button> -->
+
+        <!-- From Your Sister section -->
+        <div class="sister-section">
+            <h3>From Your Sister</h3>
+            <p>My dearest brother, you have been my <span class="highlight">rock</span> and my <span class="highlight">inspiration</span> since the day I was Met You. <span class="highlight">Thank you</span> for the countless memories we've shared.</p>
+            <p>I <span class="highlight">Like</span> how you <span class="highlight">always</span> make me laugh, even on the toughest days. Your strength and kindness is the greatest of God gift.</p>
+            <p>Am Always With  You <span class="highlight">When</span> The Critical Situations Are Happens <span class="highlight">always</span> with you. You are my heroes, my protectors, and my best friends forever.</p>
+            <p><span class="highlight">Thank you</span> for being there through thick and thin. I cherish every moment and look forward to many more.</p>
+            <p>With all my <span class="highlight">love</span>, your sister.</p>
+        </div>
+    </div>
+
+    <!-- Audio element (hidden) -->
+    <!-- Replace 'music/bgm.mp3' with your own audio file path -->
+
+
+    <!-- <button class="audio-btn" id="audioBtn">Play Music</button> -->
+
+
+
+
+
+
+        <!-- Play / Pause button -->
+<!-- <button class="audio-btn" id="audioBtn">Play Music</button> -->
+
+<!-- Audio element (no controls shown) -->
+
+     
+
+        <audio controls>
+  <source src="Annayaa.mp3" type="audio/mpeg">
+</audio>
+
+
+
+
+
+    <script>
+        // Slideshow data
+        // Replace image paths and captions with your own brothers' photos and personalized messages
+
+
+
+     
+
+
+        const slides = [
+            { img: 'Pic1.jpeg', caption: 'Happy birthday, my dear brother.' },
+            { img: 'Pic2.jpeg', caption: 'Thank you for always protecting me.' },
+            { img: 'Pic3.jpeg', caption: 'No matter how old we grow, you’ll always be my hero.' },
+            { img: 'Pic4.jpeg', caption: 'Your smile lights up my world every day.' },
+            { img: 'Pic5.jpeg', caption: 'I’m so proud of the man you’ve become.' },
+            { img: 'Pic6.jpeg', caption: 'Through every storm, you’ve been my anchor.' },
+            { img: 'Pic7.jpeg', caption: 'Your wisdom guides me like a true brother.' },
+            { img: 'Pic8.jpeg', caption: 'Laughter with you is my favorite memory.' },
+            { img: 'Pic9.jpeg', caption: 'Today I just want you to know how proud I am of who you’ve become.' },
+            { img: 'Pic10.jpeg', caption: 'Forever my brother, forever my love.' },
+
+            { img: 'Pic11.jpeg', caption: 'To my first best friend, happy birthday.' },
+            { img: 'Pic12.jpeg', caption: 'I’m grateful that I get to call you my brother for life.' },
+            { img: 'Pic13.jpeg', caption: 'Another year older, another year wiser, same crazy brother.' },
+            { img: 'Pic14.jpeg', caption: 'Wishing you a birthday as genuine and strong as your heart.' },
+            { img: 'Pic15.jpeg', caption: 'Whenever I feel lost, your words pull me back on track.' },
+            { img: 'Pic16.jpeg', caption: 'Today I celebrate not just your birthday, but our bond.' },
+            { img: 'Pic66.jpeg', caption: 'I wouldn’t trade you for any quieter or “perfect” brother in the world.' },
+            { img: 'Pic18.jpeg', caption: 'Dear brother, you are my everyday inspiration.' },
+            { img: 'Pic19.jpeg', caption: 'Watching you work hard teaches me what dedication looks like.' },
+            { img: 'Pic20.jpeg', caption: 'I pray this year rewards you for every effort you’ve made silently.' },
+
+            { img: 'Pic21.jpeg', caption: 'You’re not just my brother, you’re my first best friend.' },
+            { img: 'Pic22.jpeg', caption: 'Thank you for always protecting me.' },
+            { img: 'Pic23.jpeg', caption: 'No matter how old we grow, you’ll always be my hero.' },
+             { img: 'Pic24.jpeg', caption: 'Wishing you a birthday as genuine and strong as your heart.' },
+            { img: 'Pic1.jpeg', caption: 'Whenever I feel lost, your words pull me back on track.' },
+            { img: 'Pic2.jpeg', caption: 'Today I celebrate not just your birthday, but our bond.' },
+            { img: 'Pic4.jpeg', caption: 'I wouldn’t trade you for any quieter or “perfect” brother in the world.' },
+            { img: 'Pic3.jpeg', caption: 'Dear brother, you are my everyday inspiration.' },
+            { img: 'Pic5.jpeg', caption: 'Watching you work hard teaches me what dedication looks like.' },
+            { img: 'Pic6.jpeg', caption: 'I pray this year rewards you for every effort you’ve made silently.' },
+            { img: 'Pic7.jpeg', caption: 'To my first best friend, happy birthday.' },
+            { img: 'Pic8.jpeg', caption: 'I’m grateful that I get to call you my brother for life.' },
+            { img: 'Pic9.jpeg', caption: 'Forever my brother, forever my love.' }
+        ];
+
+
+
+        let currentSlide = 0;
+        const slideshow = document.querySelector('.slideshow');
+        const dotsContainer = document.querySelector('.dots');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        let autoPlayInterval;
+
+        // Create slides and dotsPic12p
+        slides.forEach((slide, index) => {
+            const slideDiv = document.createElement('div');
+            slideDiv.className = 'slide';
+            slideDiv.innerHTML = `<img src="${slide.img}" alt="Brother ${index + 1}"><div class="caption">${slide.caption}</div>`;
+            slideshow.appendChild(slideDiv);
+
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        const slideElements = document.querySelectorAll('.slide');
+        const dotElements = document.querySelectorAll('.dot');
+
+        // Show initial slide
+        showSlide(currentSlide);
+
+        // Auto-play
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(() => {
+                nextSlide();
+            }, 4000); // Change slide every 4 seconds
+        }
+        startAutoPlay();
+
+        // Functions
+        function showSlide(index) {
+            slideElements.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            dotElements.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+            resetAutoPlay();
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoPlay();
+        });
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoPlay();
+        });
+
+        // Audio control
+        // Audio control
+        const audio = document.getElementById('bgm');
+        const audioBtn = document.getElementById('audioBtn');
+        let isPlaying = false;
+
+        audioBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                audioBtn.textContent = 'Play Music';
+            } else {
+                audio.play();
+                audioBtn.textContent = 'Pause Music';
+            }
+            isPlaying = !isPlaying;
+        });
+
+
+    </script>
+</body>
+</html>
